@@ -48,22 +48,20 @@ public class AuthClientApiServiceConfiguration extends AuthorizationServerConfig
 	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		
-//		clients.inMemory()
-//        .withClient("trusted-client")
-//        .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-//        .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-//        .scopes("read", "write", "trust")
-//        .secret("secret")
-//        .accessTokenValiditySeconds(180).//Access token is only valid for 3 minutes.
-//        refreshTokenValiditySeconds(600);//Refresh token is only valid for 10 minutes.
-		
-		
+
 		clients.inMemory()
-		.withClient("apiTest")
-		.secret("passwordTest")
-		.scopes("session")
-		.authorizedGrantTypes("password");
+				.withClient("apiTest")
+				.secret("passwordTest")
+				.scopes("session")
+				.authorizedGrantTypes("password")
+				.and()
+				.withClient("trusted-client")
+				.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+				.authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
+				.scopes("read", "write", "trust")
+				.secret("secret")
+				.accessTokenValiditySeconds(180).//Access token is only valid for 3 minutes.
+				refreshTokenValiditySeconds(600);//Refresh token is only valid for 10 minutes.
 	}
 
 }
